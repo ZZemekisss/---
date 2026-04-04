@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Вопрос веков (нет)</title>
+        <style>
+            body {
+                background-color: rgb(65, 25, 12);
+                color: azure;
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 14px;
+                position: relative;
+                min-height: 100vh;
+                margin: 0;
+                padding: 20px;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            .button-container {
+                display: flex;
+                gap: 20px;
+                margin-top: 20px;
+                position: relative;
+            }
+            h1 {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            button {
+                padding: 15px 25px;
+                font-size: 16px;
+                cursor: pointer;
+                border: none;
+                border-radius: 10px;
+                transition: all 0.2s ease;
+                margin: 10px;
+            }
+            #Bruh {
+                background-color: #4CAF50;
+                color: white;
+                position: relative;
+            }
+            #right {
+                background-color: #f44336;
+                color: white;
+            }
+            #right:hover {
+                transform: scale(1.05);
+            }
+            .message {
+                text-align: center;
+                margin-top: 30px;
+                padding: 20px;
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 10px;
+                font-size: 24px;
+                animation: fadeIn 0.5s ease;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container">
+            <h1>Рей Хороший Джедай?</h1>
+            <div class="button-container">
+                <button id="Bruh">
+                    Да, конечно, в ней сила поколений!
+                </button>
+                <button id="right">
+                    Нет, она не хороший джедай, она вообще не джедай, а просто мусорщица
+                </button>
+            </div>
+            <div id="message"></div>
+        </div>
+
+        <script>
+            // Элементы
+            const container = document.getElementById('container');
+            const bruh = document.getElementById('Bruh');
+            const right = document.getElementById('right');
+            const messageDiv = document.getElementById('message');
+
+            // Функция для получения случайной позиции
+            let getRandomPosition = (element) => {
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                const buttonWidth = element.offsetWidth;
+                const buttonHeight = element.offsetHeight;
+
+                // Безопасные координаты
+                const maxX = windowWidth - buttonWidth - 20; // Отступ от края
+                const maxY = windowHeight - buttonHeight - 20;
+
+                let newX = Math.random() * maxX;
+                let newY = Math.random() * maxY;
+
+                newX = Math.max(10, Math.min(newX, maxX));
+                newY = Math.max(10, Math.min(newY, maxY));
+
+                return { x: newX, y: newY };
+            };
+
+            // Функция перемещения кнопки
+            function escapeFunction() {
+                const { x, y } = getRandomPosition(bruh);
+                bruh.style.position = 'fixed';
+                bruh.style.left = x + 'px';
+                bruh.style.top = y + 'px';
+            }
+
+            // Обработчик клика на кнопку "Нет"
+            right.addEventListener("click", () => {
+                messageDiv.innerHTML = '🎉 Ура!!! Правильно! 🎉<br>Рей действительно не джедай!';
+            });
+
+            // Обработчики для кнопки "Да"
+            bruh.addEventListener("mouseenter", escapeFunction);
+            bruh.addEventListener("touchstart", (e) => {
+                e.preventDefault();
+                escapeFunction();
+            });
+
+            // Обработчик изменения размера окна
+            window.addEventListener('resize', () => {
+                if (bruh.style.position === 'fixed') {
+                    const { x, y } = getRandomPosition(bruh);
+                    bruh.style.left = x + 'px';
+                    bruh.style.top = y + 'px';
+                }
+            });
+        </script>
+    </body>
+</html>
