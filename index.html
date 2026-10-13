@@ -1,146 +1,331 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <title>Вопрос года (нет)</title>
+        <title>С днем рождения, Ульяшка-Таракашка</title>
         <style>
             body {
-                background-color: rgb(65, 25, 12);
-                color: azure;
-                font-family: 'Times New Roman', Times, serif;
+                background-color: rgb(84, 45, 45);
+                color: rgb(253, 240, 237);
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+                margin: 0;               
+                height: 100vh;
+            }
+            
+            .header{
+                display: grid;
+                place-items: center;  
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 5vh;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                box-shadow: 0px 5px 10px 0px;
+            }
+
+            .main {
+                display: grid;
+                place-items: center;
                 font-size: 14px;
-                position: relative;
-                min-height: 100vh;
-                margin: 0;
+                height: 100vh;
+            }
+
+            #d123 {
+                display: grid;
+                place-items: center;
+                background-color: rgba(253, 240, 237, 0.06);
+                backdrop-filter: blur(12px);
+                width: 70%;
+                height: 60%;
+                border: 3px solid rgba(0, 0, 0, 0.25); 
+                border-radius: 0px 40px;
+                box-shadow: 0px 5px 10px 0px rgba(45, 15, 15, 0.6);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
                 padding: 20px;
             }
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                min-height: 100vh;
+
+            #d123:hover{
+                 transform: translateY(-5px);
+                 box-shadow: 0px 10px 20px 0px rgba(45, 15, 15, 0.8);
             }
-            .button-container {
-                display: flex;
-                gap: 20px;
-                margin-top: 20px;
-                position: relative;
-            }
+
             h1 {
-                text-align: center;
-                margin-bottom: 30px;
+                margin-top: 5px;
+                text-align: center; 
+                transition: transform 0.4s ease-in-out;    
             }
-            button {
-                padding: 15px 25px;
-                font-size: 16px;
-                cursor: pointer;
-                border: none;
-                border-radius: 10px;
-                transition: all 0.2s ease;
-                margin: 10px;
+
+            h1:hover{
+                transform: scale(1.2);
             }
-            #Bruh {
-                background-color: #4CAF50;
-                color: white;
+
+            .rightTop {
+                position: absolute;
+                top: 5px;   
+                right: 5px;  
+                width: 40px; 
+                height: 40px;
+                font-size: 30px;
+                cursor: pointer; 
+                user-select: none; 
+            }
+
+            /* .count {
+                display: flex;       
+                margin-top: 10px;           
+                margin-left: 10px;          
+                width: auto;         
+                padding: 5px 10px;   
+                font-size: 12px;     
+                border-radius: 8px;  
+                background-color: rgba(253, 240, 237, 0.2); 
+                border: 1px solid rgb(253, 240, 237);        
+                transition: transform 0.2s ease-in-out; 
+            } */
+
+            .pulseContainer{
+                width: 85%;
+                height: 100px;
+                margin-top: 10px;
                 position: relative;
-            }
-            #right {
-                background-color: #f44336;
-                color: white;
-            }
-            #right:hover {
-                transform: scale(1.05);
-            }
-            .message {
-                text-align: center;
-                margin-top: 30px;
-                padding: 20px;
-                background-color: rgba(0, 0, 0, 0.7);
+                background: rgba(253, 240, 237, 0.03);
                 border-radius: 10px;
-                font-size: 24px;
-                animation: fadeIn 0.5s ease;
+                overflow: hidden;
             }
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+
+            .pulse-svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            .pulse-line-filled{
+                stroke: rgb(13, 32, 135);
+                stroke-width: 3;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                fill: none;
+                transition: stroke-dashoffset 0.6s ease-in-out;
+            }
+
+            .pulse-line-empty{
+                stroke:rgba(253, 240, 237, 0.15);
+                stroke-width: 2;
+                stroke-linecap:round ;
+                stroke-linejoin: round;
+                fill: none;
+            }
+
+            button{
+                background-color: rgb(253, 240, 237);
+                width: 60%;
+                height: 50px ;
+                border: 0px;
+                border-radius: 32px;
+                font-size: 30px;
+                box-shadow: 0px 5px 10px 0px rgba(45, 15, 15, 0.6);
+                transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.5s ease;
+            }
+            button:hover {
+            background-color: rgb(225, 210, 205); 
+            transform: translateY(-4px);
+            box-shadow: 0px 10px 20px 0px rgba(45, 15, 15, 0.8);
             }
         </style>
     </head>
     <body>
-        <div class="container" id="container">
-            <h1>Рей Хороший Джедай?</h1>
-            <div class="button-container">
-                <button id="Bruh">
-                    Да, конечно, в ней сила поколений!
-                </button>
-                <button id="right">
-                    Нет, она не хороший джедай, она вообще не джедай, а просто мусорщица
-                </button>
-            </div>
-            <div id="message"></div>
+        <div class="header">
+            <h1>🎊ssssss🎊</h1>
         </div>
-
+        <div id="rightTop" class="rightTop">
+            📝
+        </div>
+        <div class="main" id="main">
+         <div id="d123">
+            <h1>С праздником!</h1><h2> А пока ты тут, пройди викторину, я надеюсь, тебе понравится</h2>
+            <button id="set" onclick="setquestion()">Начать</button>
+         </div>  
+        </div>
         <script>
-            // Элементы
-            const container = document.getElementById('container');
-            const bruh = document.getElementById('Bruh');
-            const right = document.getElementById('right');
-            const messageDiv = document.getElementById('message');
+            const questions = [
+            {
+                question: 'Как зовут нашего "первенца"?',
+                answers: ['Ба', 'Совесе', 'Абоба'],
+                index: 0, // Ба
+                explanation: 'Конечно, его зовут Ба, наш первый ребеночек, как Люк, но и про второго, Совесе, забывать не стоит😉'
+            },
+            {
+                question: 'Где мы познакомились?',
+                answers: ['В SWBF2', 'В Kyber v2', 'Большое Магелланово Облако', 'Абоба'],
+                index: 1, // kyber v2
+                explanation: 'Конечно в кайбере, как сейчас помню: я предлагаю тебе пойти на свой сервер, мы обмениваемся тг...'
+            },
+            {
+                question: 'Ты справишься с учебой и станешь прекрасным медиком?',
+                answers: ['Ба', 'Нет, скорее всего, ведь мне не хватит ума/сил', 'Да, а если даже нет, то не отчаюсь', 'Не знаю'],
+                index: 2, // Да
+                explanation: 'Ты умная и сильная, у тебя всё получится, я всегда в тебя верю, независимо от того, что ты сама думаешь о себе. '
+            },
+            {
+                question: 'Как ты будешь себя чувствовать сегодня?',
+                answers: ['Отлично, но буду весь день сидеть на диване', 'Восхитительно, ведь сегодня прекрасный день', 'Буду плакать весь день', 'Никак, вообще буду как робот'],
+                index: 1,
+                explanation: 'Нужно радоваться каждому моменту жизни, а такому особенно!'
+            }];
+            let note = document.getElementById('rightTop');
+            let d123 = document.getElementById('d123');
+            let result = document.getElementById('result');
+            const originalContent = d123.innerHTML;
+            let currentQuestionIndex = 0;
+            let rightAnswers = 0;
+            let wrongAnswers = 0;
+            let score = 2;
+            let isdone = false;
+            let oldHTML= ''
 
-            // Функция для получения случайной позиции
-            let getRandomPosition = (element) => {
-                const windowWidth = window.innerWidth;
-                const windowHeight = window.innerHeight;
-                const buttonWidth = element.offsetWidth;
-                const buttonHeight = element.offsetHeight;
 
-                // Безопасные координаты
-                const maxX = windowWidth - buttonWidth - 20; // Отступ от края
-                const maxY = windowHeight - buttonHeight - 20;
-
-                let newX = Math.random() * maxX;
-                let newY = Math.random() * maxY;
-
-                newX = Math.max(10, Math.min(newX, maxX));
-                newY = Math.max(10, Math.min(newY, maxY));
-
-                return { x: newX, y: newY };
+            function cleard123() {
+            oldHTML = d123.innerHTML;
+            if(isdone){
+                d123.innerHTML = '<div style="width:70%;"><h1 style="font-size: 20px;">Ульяна, поздравляю тебя с грандиознейшим днем в твоей жизни!🎆</h1><h2 style="font-size: 20px;">Ты прожила этот тяжелый год (ЕГЭ, расставание с одноклассниками, поступление в ВУЗ) и не просто пережила, ты стала на шаг ближе к успеху.<br> С этого дня ты совершеннолетняя и можешь делать что хочешь и когда хочешь — никто не вправе останалвивать такую львицу!<br> Я надеюсь, что ты проведешь этот день с самыми дорогими и близкими людьми, даже если это будет через экран, помни: они рядом ментально, а это важнее.</br> И, конечно же, я свободен для того, чтобы быть тем самым человеком, который близко ментально. Всегда, когда тебе что-то нужно, или ты хочешь поговорить, или тебе просто скучно, или ты чем-то расстроена - звони мне, даже если я буду занят, я перезвоню как можно скорее.</h2></div><button onclick="restored123()">Забыла? Вернемся!</button> ';
+            } else{
+                d123.innerHTML = '<div style="width:70%; display:flex;justify-content:center;"><h1 style="font-size: 200px;">🔒</h1></div>'
+                alert('пройди тест, чтобы узнать, что там😉')
+            }
             };
 
-            // Функция перемещения кнопки
-            function escapeFunction() {
-                const { x, y } = getRandomPosition(bruh);
-                bruh.style.position = 'fixed';
-                bruh.style.left = x + 'px';
-                bruh.style.top = y + 'px';
+            function restored123(){
+            
+            if(questions.length == currentQuestionIndex){
+              d123.innerHTML = oldHTML;   
+            }
+            else{
+                setquestion()
+            }
             }
 
-            // Обработчик клика на кнопку "Нет"
-            right.addEventListener("click", () => {
-                messageDiv.innerHTML = '🎉 Ура!!! Правильно! 🎉<br>Рей действительно не джедай!';
-            });
+            note.addEventListener('mouseenter', cleard123);
+            note.addEventListener('mouseleave', restored123);
+            note.addEventListener('touchstart', cleard123);
 
-            // Обработчики для кнопки "Да"
-            bruh.addEventListener("mouseenter", escapeFunction);
-            bruh.addEventListener("touchstart", (e) => {
-                e.preventDefault();
-                escapeFunction();
-            });
+            function pulse(){
+                let pulseContainer = document.createElement('div');
+                pulseContainer.className = 'pulseContainer';
 
-            // Обработчик изменения размера окна
-            window.addEventListener('resize', () => {
-                if (bruh.style.position === 'fixed') {
-                    const { x, y } = getRandomPosition(bruh);
-                    bruh.style.left = x + 'px';
-                    bruh.style.top = y + 'px';
-                }
-            });
+                let progress = currentQuestionIndex / questions.length;
+
+                let totalLength = 800;
+                let dashOffset = totalLength - (totalLength*progress);
+
+                pulseContainer.innerHTML=`
+                <svg class="pulse-svg" viewBox="0 0 400 60" preserveAspectRatio="none">
+                <path class="pulse-line-empty" d="M 0 30 L 70 30 L 80 15 L 90 45 L 100 5 L 110 55 L 120 30 L 170 30 L 180 15 L 190 45 L 200 5 L 210 55 L 220 30 L 270 30 L 280 15 L 290 45 L 300 5 L 310 55 L 320 30 L 400 30" />
+                <path class="pulse-line-filled"
+                stroke-dasharray="${totalLength}"
+                stroke-dashoffset="${dashOffset}"
+                d="M 0 30 L 70 30 L 80 15 L 90 45 L 100 5 L 110 55 L 120 30 L 170 30 L 180 15 L 190 45 L 200 5 L 210 55 L 220 30 L 270 30 L 280 15 L 290 45 L 300 5 L 310 55 L 320 30 L 400 30"
+                > 
+                </svg>
+                `;
+                d123.insertBefore(pulseContainer, d123.firstChild)
+            }
+
+            function setquestion() {
+                d123.innerHTML = '';
+
+                // let count = document.createElement('p');
+                // count.className = "count";
+                // count.textContent = `${currentQuestionIndex + 1}/${questions.length}`;
+                // d123.appendChild(count);
+
+                
+
+
+                let h1 = document.createElement('h1');
+                h1.innerText= '🎉Праздничная викторина🎉';
+                h1.style='font-size: 20px;margin-top: 5px;';
+                d123.appendChild(h1)
+
+                let title = document.createElement('h2');
+                title.textContent = questions[currentQuestionIndex].question;
+                d123.appendChild(title);
+
+                for(let i=0; i< questions[currentQuestionIndex].answers.length;i++ ){
+                     let button = document.createElement('button');
+                     button.textContent = questions[currentQuestionIndex].answers[i];
+                     button.onclick= ()=>{
+                        checkAnswer(i,questions[currentQuestionIndex].index);
+                     };
+                     d123.appendChild(button);
+                };
+                pulse()
+            };
+
+
+            function checkAnswer(answer,correctAnswer){
+                let currentQuestion = questions[currentQuestionIndex];
+            let isCorrect = answer === correctAnswer;
+
+            if (isCorrect) {
+                rightAnswers++;
+            } else {
+                wrongAnswers++;
+            }
+
+            // Увеличиваем индекс для следующего шага
+            currentQuestionIndex++; 
+            
+            // Определяем, куда идти дальше
+            let nextFunction = (currentQuestionIndex < questions.length) ? 'setquestion' : 'endQuiz';
+
+            if (isCorrect) {
+                d123.innerHTML = `
+                    <h1>Верно! ✅</h1>
+                    <p style="font-size:16px; margin: 15px 0;">${currentQuestion.explanation}</p>
+                    <button onclick="${nextFunction}()">Далее</button>
+                `;
+                pulse()
+            } else {
+                
+                d123.innerHTML = `
+                    <h1>Неверно! ❌</h1>
+                    <h2>Верный ответ: ${currentQuestion.answers[currentQuestion.index]}</h2>
+                    <p style="font-size:16px; margin: 15px 0;">${currentQuestion.explanation}</p>
+                    <button onclick="${nextFunction}()">Далее</button>
+                `;
+                pulse()
+            }
+            oldHTML = d123.innerHTML;
+            };
+
+            function endQuiz(){
+                currentQuestionIndex = questions.length;
+                isdone = true;
+                if(rightAnswers == questions.length){
+                    d123.innerHTML = `
+                    <h2>Тест пройден! 🎉</h2>
+                    <h2>Твой результат составил ${rightAnswers}/${questions.length}, ты допустила 0 ошибок. Умница🤗</h2>
+                    <h2>Твоей наградой будет лежащий на ПВЗ подарок, вот код: XXXX обязательно проверь, если что-то не так - отказывайся; если всё хорошо - пользуйся наздоровье</h2>
+                    <button onclick="cleard123()">Запомнила?) Идем дальше!</button>
+                        `;
+                    pulse()
+                }else{
+                    d123.innerHTML = `
+                    <h2>Тест пройден! 🎉</h2>
+                    <h2>Твой результат составил ${rightAnswers}/${questions.length}, ты допустила ${wrongAnswers} ошибок. Ты ведь знаешь, как нужно отвечать😉</h2>
+                    <h2>Твоей наградой будет лежащий на ПВЗ подарок, вот код: XXXX обязательно проверь, если что-то не так - отказывайся; если всё хорошо - пользуйся наздоровье</h2>
+                    <button onclick="startAgain()">Ещё разок?</button>
+                    <button onclick="cleard123()">Пойдем дальше?</button>
+                `;
+                pulse()
+                };
+                oldHTML = d123.innerHTML;
+            }
+            function startAgain() {
+                currentQuestionIndex = 0;
+                rightAnswers = 0;
+                wrongAnswers = 0;
+                score = 2;
+                setquestion();
+            }
         </script>
     </body>
 </html>
