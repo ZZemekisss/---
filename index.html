@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>С днем рождения, Ульяшка-Таракашка</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             body {
                 background-color: rgb(84, 45, 45);
@@ -17,7 +18,7 @@
                 left: 0;
                 top: 0;
                 width: 100%;
-                height: 5vh;
+                height: auto;
                 border: 2px solid rgba(0, 0, 0, 0.25);
                 box-shadow: 0px 5px 10px 0px;
             }
@@ -35,7 +36,8 @@
                 background-color: rgba(253, 240, 237, 0.06);
                 backdrop-filter: blur(12px);
                 width: 70%;
-                height: 60%;
+                min-height: 60%;
+                height: auto; 
                 border: 3px solid rgba(0, 0, 0, 0.25); 
                 border-radius: 0px 40px;
                 box-shadow: 0px 5px 10px 0px rgba(45, 15, 15, 0.6);
@@ -116,7 +118,7 @@
             button{
                 background-color: rgb(253, 240, 237);
                 width: 60%;
-                height: 50px ;
+                height: auto;
                 border: 0px;
                 border-radius: 32px;
                 font-size: 30px;
@@ -128,6 +130,17 @@
             transform: translateY(-4px);
             box-shadow: 0px 10px 20px 0px rgba(45, 15, 15, 0.8);
             }
+
+            @media (max-width: 768px) {
+                body {
+                    font-size: 16px;
+                }
+                .container {
+                    width: 100%;
+                    padding: 10px;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -147,25 +160,25 @@
             const questions = [
             {
                 question: 'Как зовут нашего "первенца"?',
-                answers: ['Ба', 'Совесе', 'Абоба'],
-                index: 0, // Ба
+                answers: ['Антон', 'Совесе', 'Абоба', 'Ба'],
+                index: 3, // Ба
                 explanation: 'Конечно, его зовут Ба, наш первый ребеночек, как Люк, но и про второго, Совесе, забывать не стоит😉'
             },
             {
                 question: 'Где мы познакомились?',
-                answers: ['В SWBF2', 'В Kyber v2', 'Большое Магелланово Облако', 'Абоба'],
+                answers: ['В SWBF2', 'В Kyber v2', 'В парке', 'Абоба', 'Ба'],
                 index: 1, // kyber v2
                 explanation: 'Конечно в кайбере, как сейчас помню: я предлагаю тебе пойти на свой сервер, мы обмениваемся тг...'
             },
             {
                 question: 'Ты справишься с учебой и станешь прекрасным медиком?',
-                answers: ['Ба', 'Нет, скорее всего, ведь мне не хватит ума/сил', 'Да, а если даже нет, то не отчаюсь', 'Не знаю'],
-                index: 2, // Да
+                answers: ['Нет, скорее всего, ведь мне не хватит ума/сил', 'Да, а если даже нет, то не отчаюсь', 'Не знаю', 'Ба'],
+                index: 1, // Да
                 explanation: 'Ты умная и сильная, у тебя всё получится, я всегда в тебя верю, независимо от того, что ты сама думаешь о себе. '
             },
             {
                 question: 'Как ты будешь себя чувствовать сегодня?',
-                answers: ['Отлично, но буду весь день сидеть на диване', 'Восхитительно, ведь сегодня прекрасный день', 'Буду плакать весь день', 'Никак, вообще буду как робот'],
+                answers: ['Отлично, но буду весь день сидеть на диване', 'Восхитительно, ведь сегодня прекрасный день', 'Буду плакать весь день', 'Никак, вообще буду как робот', 'Ба'],
                 index: 1,
                 explanation: 'Нужно радоваться каждому моменту жизни, а такому особенно!'
             }];
@@ -262,17 +275,16 @@
             function checkAnswer(answer,correctAnswer){
                 let currentQuestion = questions[currentQuestionIndex];
             let isCorrect = answer === correctAnswer;
-
-            if (isCorrect) {
+             let isItBa = currentQuestion.answers[answer] === 'Ба';
+                console.log(questions[currentQuestionIndex].answers);
+            if (isCorrect||isItBa) {
                 rightAnswers++;
-            } else {
+            }else {
                 wrongAnswers++;
             }
 
-            // Увеличиваем индекс для следующего шага
             currentQuestionIndex++; 
             
-            // Определяем, куда идти дальше
             let nextFunction = (currentQuestionIndex < questions.length) ? 'setquestion' : 'endQuiz';
 
             if (isCorrect) {
@@ -282,6 +294,12 @@
                     <button onclick="${nextFunction}()">Далее</button>
                 `;
                 pulse()
+            }else if(isItBa){
+                d123.innerHTML = `
+                    <h1>Верно!✅</h1>
+                    <p style="font-size:16px; margin: 15px 0;">Ба всегда верный вариант</p>
+                    <button onclick="${nextFunction}()">Далее</button>
+                `;
             } else {
                 
                 d123.innerHTML = `
